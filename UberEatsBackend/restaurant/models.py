@@ -6,8 +6,14 @@ class Restaurant(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
     description = models.TextField()
-    location = models.CharField(max_length=255)
-    contact_info = models.CharField(max_length=100)
+    address = models.CharField(max_length=255, blank=True)
+    city = models.CharField(max_length=255, blank=True)
+    state = models.CharField(max_length=255, blank=True)
+    country = models.CharField(max_length=255, blank=True)
+    phone_number = models.CharField(max_length=15, blank=True)
+
+    def __str__(self):
+        return self.name
 
 class Order(models.Model):
     customer = models.ForeignKey('customer.Customer', on_delete=models.CASCADE)

@@ -1,28 +1,22 @@
 from django.urls import path
-from . import views
+from .views import (
+    customer_login,
+    signup,
+    logout,
+    profile,
+    update_profile,
+    favorites,
+    add_favorite,
+    remove_favorite,
+)
 
 urlpatterns = [
-    # Customer Sign-up
-    path('signup/', views.signup, name='signup'),
-
-    # Customer Login
-    path('login/', views.login, name='login'),
-
-    # Customer Logout
-    path('logout/', views.logout, name='logout'),
-
-    # Customer Profile
-    path('profile/', views.profile, name='profile'),
-
-    # Update Customer Profile
-    path('profile/update/', views.update_profile, name='update_profile'),
-
-    # Favorite Restaurants
-    path('favorites/', views.favorites, name='favorites'),
-
-    # Add a restaurant to favorites
-    path('favorites/add/<int:restaurant_id>/', views.add_favorite, name='add_favorite'),
-
-    # Remove a restaurant from favorites
-    path('favorites/remove/<int:restaurant_id>/', views.remove_favorite, name='remove_favorite'),
+    path('signup/', signup, name='customer-signup'),
+    path('login/', customer_login, name='customer-login'),
+    path('logout/', logout, name='customer-logout'),
+    path('profile/', profile, name='customer-profile'),
+    path('profile/update/', update_profile, name='customer-update-profile'),
+    path('favorites/', favorites, name='customer-favorites'),
+    path('favorites/add/<int:restaurant_id>/', add_favorite, name='customer-add-favorite'),
+    path('favorites/remove/<int:restaurant_id>/', remove_favorite, name='customer-remove-favorite'),
 ]
