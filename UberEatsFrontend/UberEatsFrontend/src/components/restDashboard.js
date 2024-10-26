@@ -229,8 +229,146 @@
 
 // dashboard.js
 
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+
+// const Dashboard = () => {
+//   const [restaurant, setRestaurant] = useState(null);
+//   const [dishes, setDishes] = useState([]);
+//   const [newDish, setNewDish] = useState({ name: '', description: '', price: '', category: '', image: null });
+//   const [editDish, setEditDish] = useState(null);
+//   const [editProfile, setEditProfile] = useState({});
+
+//   const restaurantId = 1; // replace with dynamic value if available
+//   const API_BASE_URL = "http://localhost:8000"; // replace with actual backend URL
+
+//   // 1. Fetch restaurant details
+//   useEffect(() => {
+//     axios.get(`${API_BASE_URL}/restaurant/${restaurantId}/`)
+//       .then((response) => setRestaurant(response.data))
+//       .catch((error) => console.error('Error fetching restaurant details:', error));
+//   }, [restaurantId]);
+
+//   // 2. Fetch all dishes in the restaurant
+//   useEffect(() => {
+//     axios.get(`${API_BASE_URL}/restaurant/${restaurantId}/dishes/`)
+//       .then((response) => setDishes(response.data))
+//       .catch((error) => console.error('Error fetching dishes:', error));
+//   }, [restaurantId]);
+
+//   // 3. Add new dish
+//   const handleAddDish = () => {
+//     const formData = new FormData();
+//     Object.keys(newDish).forEach((key) => {
+//       formData.append(key, newDish[key]);
+//     });
+
+//     axios.post(`${API_BASE_URL}/restaurant/${restaurantId}/add-dish/`, formData)
+//       .then(() => {
+//         setNewDish({ name: '', description: '', price: '', category: '', image: null });
+//         // Refresh dish list
+//         axios.get(`${API_BASE_URL}/restaurant/${restaurantId}/dishes/`).then((res) => setDishes(res.data));
+//       })
+//       .catch((error) => console.error('Error adding new dish:', error));
+//   };
+
+//   // 4. Edit dish details
+//   const handleEditDish = () => {
+//     axios.put(`${API_BASE_URL}/dish/${editDish.id}/edit/`, editDish)
+//       .then(() => {
+//         setEditDish(null);
+//         // Refresh dish list
+//         axios.get(`${API_BASE_URL}/restaurant/${restaurantId}/dishes/`).then((res) => setDishes(res.data));
+//       })
+//       .catch((error) => console.error('Error editing dish:', error));
+//   };
+
+//   // 5. Edit restaurant profile
+//   const handleEditProfile = () => {
+//     axios.put(`${API_BASE_URL}/restaurant/${restaurantId}/edit-profile/`, editProfile)
+//       .then((response) => {
+//         setRestaurant(response.data);
+//         setEditProfile({});
+//       })
+//       .catch((error) => console.error('Error editing profile:', error));
+//   };
+
+//   return (
+//     <div className="dashboard">
+//       <h1>Restaurant Dashboard</h1>
+
+//       {/* Restaurant Profile Details */}
+//       {restaurant && (
+//         <div>
+//           <h2>{restaurant.name}</h2>
+//           <p>{restaurant.description}</p>
+//           <button onClick={() => setEditProfile(restaurant)}>Edit Profile</button>
+//         </div>
+//       )}
+
+//       {/* Edit Profile Modal */}
+//       {editProfile && (
+//         <div className="modal">
+//           <h2>Edit Profile</h2>
+//           <input type="text" placeholder="Name" value={editProfile.name} onChange={(e) => setEditProfile({ ...editProfile, name: e.target.value })} />
+//           <input type="text" placeholder="Email" value={editProfile.email} onChange={(e) => setEditProfile({ ...editProfile, email: e.target.value })} />
+//           {/* Add other fields as needed */}
+//           <button onClick={handleEditProfile}>Save Changes</button>
+//           <button onClick={() => setEditProfile(null)}>Cancel</button>
+//         </div>
+//       )}
+
+//       {/* Dish List */}
+//       <h2>Dishes</h2>
+//       <ul>
+//         {dishes.map((dish) => (
+//           <li key={dish.id}>
+//             <h3>{dish.name}</h3>
+//             <p>{dish.description}</p>
+//             <p>Price: ${dish.price}</p>
+//             <p>Category: {dish.category}</p>
+//             <button onClick={() => setEditDish(dish)}>Edit Dish</button>
+//           </li>
+//         ))}
+//       </ul>
+
+//       {/* Add New Dish */}
+//       <div>
+//         <h2>Add New Dish</h2>
+//         <input type="text" placeholder="Name" value={newDish.name} onChange={(e) => setNewDish({ ...newDish, name: e.target.value })} />
+//         <input type="text" placeholder="Description" value={newDish.description} onChange={(e) => setNewDish({ ...newDish, description: e.target.value })} />
+//         <input type="number" placeholder="Price" value={newDish.price} onChange={(e) => setNewDish({ ...newDish, price: e.target.value })} />
+//         <input type="text" placeholder="Category" value={newDish.category} onChange={(e) => setNewDish({ ...newDish, category: e.target.value })} />
+//         <input type="file" onChange={(e) => setNewDish({ ...newDish, image: e.target.files[0] })} />
+//         <button onClick={handleAddDish}>Add Dish</button>
+//       </div>
+
+//       {/* Edit Dish Modal */}
+//       {editDish && (
+//         <div className="modal">
+//           <h2>Edit Dish</h2>
+//           <input type="text" placeholder="Name" value={editDish.name} onChange={(e) => setEditDish({ ...editDish, name: e.target.value })} />
+//           <input type="text" placeholder="Description" value={editDish.description} onChange={(e) => setEditDish({ ...editDish, description: e.target.value })} />
+//           <input type="number" placeholder="Price" value={editDish.price} onChange={(e) => setEditDish({ ...editDish, price: e.target.value })} />
+//           <input type="text" placeholder="Category" value={editDish.category} onChange={(e) => setEditDish({ ...editDish, category: e.target.value })} />
+//           <button onClick={handleEditDish}>Save Changes</button>
+//           <button onClick={() => setEditDish(null)}>Cancel</button>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Dashboard;
+
+
+
+
+// dashboard.js
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Dashboard.css'; 
 
 const Dashboard = () => {
   const [restaurant, setRestaurant] = useState(null);

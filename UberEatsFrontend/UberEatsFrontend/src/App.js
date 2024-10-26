@@ -35,8 +35,8 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard'; 
 import Profile from './components/Profile';
-import restProfile from './components/restProfile';
-import restDashboard from './components/restDashboard';
+import RestProfile from './components/restProfile';
+import RestDashboard from './components/restDashboard';
 
 function App() {
   return (

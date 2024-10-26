@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const restProfile = () => {
+const RestProfile = () => {
   const [profileData, setProfileData] = useState({
     username: '', email: '', date_of_birth: '', city: '', state: '', country: '', phone_number: '', nickname: ''
   });
@@ -198,4 +198,4 @@ const restProfile = () => {
   );
 };
 
-export default restProfile;
+export default RestProfile;

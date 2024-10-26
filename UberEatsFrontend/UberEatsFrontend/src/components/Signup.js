@@ -74,48 +74,47 @@ function Signup() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+      
         const formData = {
-            email: email,
-            name: name,
-            password: password,
-            ...(isCustomerSignup ? {} : {  // Restaurant description
-                address: address, 
-                city: city, 
-                state: state, 
-                country: country 
-            })  // Add location fields only for restaurant signup
+          email: email,
+          name: name,
+          password: password,
+          ...(isCustomerSignup ? {} : {
+            address: address,
+            city: city,
+            state: state,
+            country: country,
+          }),
         };
-
-        // Set the signup URL based on the toggle state
+      
         const signupUrl = isCustomerSignup 
-            ? 'http://127.0.0.1:8000/api/customer/signup/' 
-            : 'http://127.0.0.1:8000/api/restaurant/signup/';
-
+          ? 'http://127.0.0.1:8000/api/customer/signup/' 
+          : 'http://127.0.0.1:8000/api/restaurant/signup/';
+      
         try {
-            const response = await fetch(signupUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-            
-            const data = await response.json();
-            console.log(data);
-
-            if (response.ok) {
-                alert(data.status);  // Display success message
-                navigate('/login');  // Redirect to login page
-            } else {
-                alert(data.error);  // Display error message
-            }
-
+          const response = await fetch(signupUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+      
+          const data = await response.json();
+          console.log(data); // Log the response data for debugging
+      
+          if (response.ok) {
+            alert(data.message || 'Signup successful'); // Use a fallback message
+            navigate('/login'); // Redirect to login page
+          } else {
+            alert(data.message || 'Signup failed'); // Use a fallback message
+          }
         } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred during signup');
+          console.error('Error:', error);
+          alert('An error occurred during signup');
         }
-    };
+      };
+      
 
     return (
         <div className="signup-container">
