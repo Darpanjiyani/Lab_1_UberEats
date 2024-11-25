@@ -1,0 +1,16 @@
+replicaCount: 1  # Number of Kafka broker pods
+
+zookeeper:
+  enabled: false  # Disable Zookeeper
+
+kafka:
+  enabledConfiguration: kraft  # Use KRaft mode
+  broker:
+    replicas: 1  # Number of Kafka brokers
+
+controller:
+  replicaCount: 1  # Enable a controller for KRaft mode
+
+persistence:
+  enabled: true  # Enable persistence for Kafka
+  size: 8Gi  # Storage size for persistent volumes

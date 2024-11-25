@@ -1,0 +1,43 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: backend-deployment
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: backend
+#   template:
+#     metadata:
+#       labels:
+#         app: backend
+#     spec:
+#       containers:
+#       - name: backend
+#         image: darpanjiyani/uber-eats-backend
+#         ports:
+#         - containerPort: 8000
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: darpanjiyani/uber-eats-backend  # Replace with your actual image name
+        ports:
+        - containerPort: 8000
+        env:
+        - name: KAFKA_BROKER
+          value: "kafka.default.svc.cluster.local:9092"  # Adjust if your Kafka service name differs
+
